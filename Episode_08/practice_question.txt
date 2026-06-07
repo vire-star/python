@@ -1,0 +1,35 @@
+Q1. Yeh function likhо:
+    - Naam: rectangle_area
+    - Parameters: length, width
+    - Return: area (length * width)
+
+Q2. Output kya hoga?
+    def mystery(x, y=10):
+        return x + y
+
+    print(mystery(5))
+    print(mystery(5, 20))
+
+Q3. Galti dhundho:
+    def greet(name):
+        return "Hello " + name
+
+    result = greet
+    print(result)
+
+Q4. Output kya hoga?
+    def counter():
+        global count
+        count += 1
+
+    count = 0
+    counter()
+    counter()
+    counter()
+    print(count)
+
+Q5. Yeh function likhо:
+    - Naam: is_even
+    - Parameter: number
+    - Return: True agar even
+              False agar odd

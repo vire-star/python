@@ -1,0 +1,30 @@
+Q1. Output kya hoga?
+    for i in range(2, 10, 3):
+        print(i)
+
+Q2. Output kya hoga?
+    i = 10
+    while i > 0:
+        print(i)
+        i -= 3
+
+Q3. Yeh code mein kya problem hai?
+    while True:
+        name = input("Naam: ")
+        print(f"Hello {name}")
+
+Q4. Output kya hoga?
+    for i in range(5):
+        if i == 3:
+            break
+        if i == 1:
+            continue
+        print(i)
+
+Q5. Yeh pattern print karo 
+    using nested loops:
+    1
+    12
+    123
+    1234
+    12345

@@ -1,0 +1,41 @@
+Q1. Yeh valid variable names hain?
+    a) 2student
+    b) student_2
+    c) student-name
+    d) _student
+    e) class
+
+Q2. Output kya hoga?
+    x, y = 10, 20
+    x, y = y, x
+    print(x, y)
+
+Q3. Output kya hoga?
+    print(True + True + False)
+
+Q4. Yeh code mein kya galat hai?
+    price = "499"
+    discount = 50
+    final = price - discount
+    print(final)
+
+Q5. 0.1 + 0.2 == 0.3 
+    True ya False? Kyun?
+
+
+    Answers
+
+Q1. Valid: b, d
+    Invalid: a (number se shuru)
+             c (hyphen)
+             e (reserved keyword)
+
+Q2. 20 10 (swap hua)
+
+Q3. 2 (True=1, True=1, False=0)
+
+Q4. price string hai, discount int
+    TypeError aayega
+    Fix: price = int("499") ya 499
+
+Q5. False — float precision issue

@@ -1,0 +1,39 @@
+Q1. Output kya hoga?
+    x = 15
+    if x > 10:
+        print("Bada")
+    if x > 20:
+        print("Bahut bada")
+    else:
+        print("Chota")
+
+Q2. Output kya hoga?
+    marks = 75
+    if marks >= 90:
+        print("A")
+    elif marks >= 80:
+        print("B")
+    elif marks >= 70:
+        print("C")
+    else:
+        print("D")
+
+Q3. Galti dhundho:
+    age = 20
+    if age = 18:
+        print("18 saal")
+
+Q4. Ek line mein likho:
+    number = 7
+    # Agar number positive hai
+    # toh "Positive" warna "Negative"
+
+Q5. Output kya hoga?
+    a = True
+    b = False
+    if not a or b:
+        print("Condition 1")
+    elif a and not b:
+        print("Condition 2")
+    else:
+        print("Condition 3")

@@ -1,0 +1,24 @@
+Q1. Output kya hoga?
+    name = "Python"
+    print(name[2:5])
+
+Q2. Output kya hoga?
+    print("Hello"[::-1])
+
+Q3. Yeh code mein kya galat hai?
+    name = "Rahul"
+    name[0] = "S"
+
+Q4. Output kya hoga?
+    print(bool("False"))
+    print(bool(""))
+    print(bool(0))
+
+Q5. TypeError fix karo:
+    age = input("Age: ")
+    print(age + 10)
+
+Q6. Output kya hoga?
+    x = int(float("9.99"))
+    print(x)
+
