@@ -1,40 +1,52 @@
-# Variables Mistakes
+# Variables Mistakes ⚠️
 
-# Mistake 1: variable use karo define karne se pehle
+# Mistake 1 🚫: Variable use karo define karne se pehle ❌
+# Python upar se neeche code padhta hai (top to bottom)
+# Agar variable define nahi kiya to usko use nahi kar sakte!
 
-# Galat
-# print(age)
-# age=25
+# Galat ❌
+# print(age)  # ❌ ERROR! age abhi exist nahi karta!
+# age=25     # Define baad mein kiya
 
 
-# sahi
-age=25
-print(age)
+# Sahi ✅
+age=25       # Pehle define karo
+print(age)   # Phir use karo - ab kaam karega! 🎯
 
-# Mistake 2: Case sensitivity ka dhyan nahi rakhna
+# Yaad rakho: Define karo ➡️ Phir use karo! 🔄
+
+
+# Mistake 2 🚫: Case sensitivity ka dhyan nahi rakhna ❌
 name="John"
 Name="Alice"
 NAME="Bob"
-print(name)
-print(Name)
-print(NAME)
+print(name)   # Output: John
+print(Name)   # Output: Alice
+print(NAME)   # Output: Bob
 
-# python case sensitive language hai, isliye name, Name aur NAME alag alag variables hain. Agar aap case sensitivity ka dhyan nahi rakhte to aapko unexpected results mil sakte hain.
+# Sab alag alag variables hain 😲
+# Python case-sensitive language hai 🐍
+# isliye name, Name aur NAME teeno alag hain!
+# Agar dhyan nahi rakha to unexpected results mil sakte hain 😵💫
 
 
-# Mistake 3: reserved keyworkd as variable name use karna
-# reserved keywords wo words hote hain jo Python ke syntax ka part hote hain. Aap in keywords ko variable name ke roop mein use nahi kar sakte. Agar aap reserved keyword ko variable name ke roop mein use karte hain to aapko syntax error milega.
+# Mistake 3 🚫: Reserved keywords ko variable name mat do ❌
+# Reserved keywords Python ke special words hote hain 
+# (jaise class, for, if, list, etc.)
+# Inhe variable name nahi bana sakte - syntax error aayega! 🚨
 
-# Galat
-class="match" # invalid variable name, cannot use reserved keywords
-for=10 # invalid variable name, cannot use reserved keywords
-if=5 # invalid variable name, cannot use reserved keywords
-list=[1,2,3] # invalid variable name, cannot use reserved keywords
+# Galat ❌
+class="match"   # ❌ ERROR: 'class' reserved keyword hai
+for=10          # ❌ ERROR: 'for' reserved keyword hai
+if=5            # ❌ ERROR: 'if' reserved keyword hai
+list=[1,2,3]    # ❌ ERROR: 'list' reserved keyword hai
 
-# sahi
+# Sahi ✅ - Thoda modify karo to kaam karega!
+class_name="match"  # ✅ underscore laga diya, ab valid hai!
+for_count=10        # ✅ for ki jagah for_count use kiya
+if_condition=5      # ✅ if ki jagah if_condition use kiya
+my_list=[1,2,3]     # ✅ my_list use kiya
 
-class_name="match" # valid variable name
-for_count=10 # valid variable name
-if_condition=5 # valid variable name
-my_list=[1,2,3] # valid variable name
+# 💡 Tip: Reserved keywords ki list Google pe search karlo!
+# "Python reserved keywords list" - bookmark rakh lo 📑
 
