@@ -1,207 +1,233 @@
-# AI Code Roaster
+# AI Code Roaster 🎯🔥
+# Yeh project Google Gemini AI ka use karta hai
+# aapke Python code ko roast (mazaaq) karne ke liye! 😂
 
+# Libraries import kar rahe hain
 from google import genai
 from dotenv import load_dotenv
 import os
 
-# .env file loadk karenge
-
+# .env file load karenge - isme API key stored hai
 load_dotenv()
 
-# step 1
+
+# =============================================
+# STEP 1 : Gemini client setup
+# =============================================
 
 def setup_gemini():
     """
-    gemini client banayenge
+    Kaam: Gemini AI ka client banata hai
+    Return: ready-to-use Gemini client object
+
+    Process:
+    1. Environment se API key nikalta hai
+    2. Check karta hai key mili ya nahi
+    3. Client banata hai aur return karta hai
     """
 
-    # API key ko laayenge environment se
+    # API key environment se laao
+    api_key = os.getenv("GEMINI_API")
 
-    api_key=os.getenv("GEMINI_API")
-
-    # check karo api mili ya nhi 
-
+    # Check karo - API key mili ya nahi?
     if not api_key:
-        print("Error: Gemini API key not available 🔑❌")
+        # Agar key nahi mili to error dikhao aur program band karo
+        print("Error: Gemini API key not available ")
         exit()
 
-    # client banayenge and return karenge
-
+    # Client banaya aur return kiya
     client = genai.Client(api_key=api_key)
     return client
-    
 
-# Step 2
+
+# =============================================
+# STEP 2 : User se code lena
+# =============================================
 
 def get_code_from_user():
     """
-    hum yahan par user se uska code lenge
+    Kaam: User se code input leta hai (multiple lines)
+    Return: Saare lines ko ek string mein jod kar return karta hai
+
+    User END likh kar batata hai ki code khatam hua
     """
-    print("*\n*" +"="*40)
-    print("apna code paste karo aur END likh kar khatam karo 📝")
 
-    print("*\n*" +"="*40)
+    # User ko instructions dikhao
+    print("*\n*" + "=" * 40)
+    print("apna code paste karo aur END likh kar khatam karo ")
+    print("*\n*" + "=" * 40)
 
-    # code lines store karne k liye
+    # Code lines store karne ke liye empty list
+    code_lines = []
 
-    code_lines=[]
-
-    # Baar baar lines lo- end aaney tak
-    # yeh loop ka kaam
-
-    # user code dega, aur hummey nhi pata ki user k code mai kitni line hia 
+    # Loop - user se baar baar line lo, END aane tak
+    # Hamein nahi pata user kitni lines likhega, isiliye while True use kiya
     while True:
-        # Ek line lo user se
+        # User se ek line lo
         line = input("➡️ ")
 
-        #  End aaya band karo
+        # Check karo - kya user ne END likha?
+        # .strip() -> extra spaces hataye
+        # .upper() -> "end" ko "END" banaye
+        if line.strip().upper() == "END":
+            break  # Loop se bahar!
 
-        # print("hello word")
-        #    print("hi")
-        if line.strip().upper()=="END":
-            # end End -> "END"
-            break
-
-        # line store karo
-        
+        # Line ko list mein store karo
         code_lines.append(line)
 
-        # sab lines ek string mein jodo
+    # Saari lines ko ek string mein jodo
+    # "\n" ka matlab hai new line - har line ke beech mein enter lagao
+    complete_code = "\n".join(code_lines)
 
-    complete_code ="\n".join(code_lines)
     return complete_code
-    
-    # ["line1",
-    #  "line2",
-    #  "line3"]
-    # "line1/line2/line3"
+
+    # Example:
+    # code_lines = ["print('hi')", "print('bye')"]
+    # join -> "print('hi')\nprint('bye')"
 
 
+# =============================================
+# STEP 3 : Gemini se roast karwana
+# =============================================
 
-# step 3
-# gemini se roast krwayenge
-
-def roast_code(client,code):
+def roast_code(client, code):
     """
-    gemini se roast karwayebge
+    Kaam: Gemini AI ko prompt dekar code roast karwana
+    Return: AI ka roast response (text)
+
+    Input:
+    - client: Gemini client object
+    - code: User ka jo code roast karna hai
     """
 
-    prompt=f"""
+    # Prompt banaya - yeh Gemini ko batata hai ki kya karna hai
+    prompt = f"""
 
-    tu ek expert Python developer hai 🐍
-    jo funny style mai code review karta hai 😂
+    tu ek expert Python developer hai
+    jo funny style mai code review karta hai
 
-    neeche diya gaya Python code dekh 👇
+    neeche diya gaya Python code dekh
 
     ```python
     {code}
     ```
     ab yeh karo:
 
-    1. Roast funny style code main 🔥
-    iski kamiya batao, Hindi aur English mix karke. Emoji bhi use kar sakte ho 😄
-    genuine mistakes ko point out karo 🎯
+    1. Roast funny style code main
+    iski kamiya batao, Hindi aur English mix karke. Emoji bhi use kar sakte ho
+    genuine mistakes ko point out karo
 
-    2. Better code - sahi tarika dikhao ✅
-    explain karo kyun better hai yeh 💡
+    2. Better code - sahi tarika dikhao
+    explain karo kyun better hai yeh
 
-    3. Level - batao yeh code hai 📊
+    3. Level - batao yeh code hai
     Beginner / Intermediate / Advanced
 
-    4. Score - 1 to 10 mein score do ⭐
+    4. Score - 1 to 10 mein score do
 
     format exactly yeh rakho:
-    🔥 Roast:
+    Roast:
     [roast yaha par]
 
-    ✨ Better Code:
+    Better Code:
     [better code yahan par]
 
-    📈 Level: [level]
+    Level: [level]
 
-    💪 [motivational line]
+    [motivational line]
     """
-    
-    # gemini ko prompt de
 
+    # Gemini ko prompt bhejo
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents=prompt
-
+        model="gemini-3.5-flash",  # Model ka naam
+        contents=prompt             # Jo prompt bhejna hai
     )
 
+    # Response ka text return karo
     return response.text
 
 
-# step 4 result print karo
+# =============================================
+# STEP 4 : Result print karna
+# =============================================
 
 def print_result(roast):
     """
-    roast result nicely print karo
+    Kaam: Gemini ka roast response nicely format karke print karna
+    Input: roast - Gemini ka response text
     """
 
-    print("\n"+"="*40)
-    print("Gemini ka roast: 🔥😆")
-    print("="*40)
-    print(roast)
-    print("\n"+"="*40)
+    print("\n" + "=" * 40)          # Upar ki border
+    print("Gemini ka roast: ")       # Title
+    print("=" * 40)                  # Border
+    print(roast)                     # Roast ka content
+    print("\n" + "=" * 40)          # Neeche ki border
 
 
-
-
-# step 5
+# =============================================
+# STEP 5 : Dobara puchhna
+# =============================================
 
 def ask_again():
     """
-    User se dobara puchenge
+    Kaam: User se puchhta hai ki aur code roast karwana hai ya nahi
+    Return: True (haan) / False (nahi)
 
+    Agar user "yes" (kuch bhi case mein) likhega to True return hoga
     """
 
-    choice=input("\n Ek aur code roast karna hai kya? (yes/no): 🤔 ")
-    return choice.strip().lower()=="yes"
-# "Yes, yes YES"
+    choice = input("\n Ek aur code roast karna hai kya? (yes/no): ")
 
+    # choice.strip() -> extra spaces hatao
+    # .lower() -> "YES" ko "yes" karo
+    # == "yes" -> agar "yes" hai to True, nahi to False
+    return choice.strip().lower() == "yes"
+
+
+# =============================================
+# MAIN FUNCTION - Poora program yahan se chalta hai
+# =============================================
 
 def main():
     """
-    maine function poora program chalta hai 
+    Kaam: Program ka entry point - saare steps ko coordinate karta hai
 
-
-    
+    Flow:
+    1. Gemini setup karo (ek baar)
+    2. Loop chalao (baar baar)
+       a. User se code lo
+       b. Check karo code empty to nahi
+       c. Gemini se roast karwao
+       d. Result print karo
+       e. Puchho - aur karna hai?
+    3. Bye bolo
     """
 
-    # gemini setyp karo- ek baar
+    # Step 1: Gemini setup karo (sirf ek baar!)
     client = setup_gemini()
 
-
-    # pehli baar seedha chalao
-
-    # phir user ki marzi pe
-
+    # Step 2: Loop - user jab tak chahe tab tak roast karte raho
     while True:
-        # user se code lo
+        # User se code lo
         code = get_code_from_user()
 
-        # checke karo -code empty toh nhi 
+        # Check karo - kya code empty hai?
+        if not code.strip():           # code.strip() -> extra spaces hatao
+            print("Bhai kuch to likho! ")  # Warning!
+            continue                    # Wapas loop ke shuru mein jao
 
-        if not code.strip():
-            print("Bhai kuch to likho! 😤✍️")
-            continue
+        # Roast karwao
+        print("\n Gemini se roast karwa raha hoon... ")
+        roast = roast_code(client, code)
 
-        # roast karwao
-
-        print("\n Gemini se roast karwa raha hoon... ⏳🔥")
-        roast = roast_code(client,code)
-
-        # result dikhao
+        # Result print karo
         print_result(roast)
 
-        # dobara
-        if not ask_again():
-            print("\n Bye! Code likhte raho 🚀👨‍💻")
-            break
-    
+        # Dobara puchho
+        if not ask_again():            # Agar user ne "no" kaha
+            print("\n Bye! Code likhte raho ")
+            break                      # Loop se bahar, program khatam!
 
 
-
+# Program ka starting point
 main()
